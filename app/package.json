@@ -8,6 +8,8 @@
   "copyright": "© 2016, your company here",
   "main": "background.js",
   "dependencies": {
-    "fs-jetpack": "^0.7.0"
+    "fs-jetpack": "^0.7.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   }
 }

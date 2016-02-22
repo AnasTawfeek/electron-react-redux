@@ -1,7 +1,14 @@
-export var greet = function () {
-    return 'Hello World!';
-};
+import React, { Component } from 'react';
+import env from '../env';
 
-export var bye = function () {
-    return 'See ya!';
-};
+export default class HelloWorld extends Component {
+ render() {
+  return (
+    <div>
+      <h2>Hello React!</h2>
+      <p>You are in {env.name} environment</p>
+    </div>
+  );
+ }
+
+}

@@ -19,7 +19,7 @@ var mainWindowState = windowStateKeeper('main', {
     height: 600
 });
 
-app.on('ready', function () {
+let startMainWindow = function() {
 
     mainWindow = new BrowserWindow({
         x: mainWindowState.x,
@@ -45,9 +45,15 @@ app.on('ready', function () {
 
     mainWindow.on('close', function () {
         mainWindowState.saveState(mainWindow);
+        mainWindow = null;
     });
+}
+
+app.on('ready', startMainWindow);
+app.on('activate', (event, hasVisibleWindows) => {
+  if (!hasVisibleWindows) startMainWindow();
 });
 
-app.on('window-all-closed', function () {
-    app.quit();
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') app.quit();
 });

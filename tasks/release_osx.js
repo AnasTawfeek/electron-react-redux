@@ -133,15 +133,41 @@ var cleanClutter = function () {
     return tmpDir.removeAsync('.');
 };
 
+var moveAppToReleases = function() {
+  var destDir = jetpack.dir(releasesDir.path() + '/osx', { empty: true });
+  return jetpack.moveAsync(tmpDir.path(), destDir.path());
+}
+
 module.exports = function () {
-    return init()
-    .then(copyRuntime)
-    .then(cleanupRuntime)
-    .then(packageBuiltApp)
-    .then(finalize)
-    .then(renameApp)
-    .then(signApp)
-    .then(packToDmgFile)
-    .then(cleanClutter)
-    .catch(console.error);
+  var appPlan = function() {
+      return init()
+      .then(copyRuntime)
+      .then(cleanupRuntime)
+      .then(packageBuiltApp)
+      .then(finalize)
+      .then(renameApp)
+      .then(signApp)
+      .then(moveAppToReleases)
+      .catch(console.error);
+    };
+
+    var dmgPlan = function() {
+      return init()
+      .then(copyRuntime)
+      .then(cleanupRuntime)
+      .then(packageBuiltApp)
+      .then(finalize)
+      .then(renameApp)
+      .then(signApp)
+      .then(packToDmgFile)
+      .then(cleanClutter)
+      .catch(console.error);
+    };
+
+    if (utils.getIsArhive()) {
+      dmgPlan();
+    }
+    else {
+      appPlan();
+    }
 };

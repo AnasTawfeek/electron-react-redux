@@ -38,3 +38,7 @@ module.exports.spawnablePath = function (path) {
     }
     return path;
 };
+
+module.exports.getIsArhive = function () {
+  return (argv.archive === true);
+}

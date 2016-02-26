@@ -4,9 +4,9 @@ import env from '../env';
 export default class HelloWorld extends Component {
  render() {
   return (
-    <div>
-      <h2>Hello React!</h2>
-      <p>You are in {env.name} environment</p>
+    <div className="container">
+      <h1>Hello React!</h1>
+      <p className="subtitle">You are in <em>{env.name}</em> environment</p>
     </div>
   );
  }

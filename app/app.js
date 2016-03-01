@@ -9,13 +9,16 @@ import env from './env';
 
 import React from 'react';
 import { render } from 'react-dom';
-import HelloWorld from './hello_world/hello_world'; // code authored by you in this project
+import { Provider } from 'react-redux'
 
-// import our redux actions
-import { addTodo, completeTodo, setVisibilityFilter, VisibilityFilters } from './actions/todo'
+import App from './components/App'
+import HelloWorld from './hello_world/hello_world'; // code authored by you in this project
 
 // our main redux store
 import store from './stores/index'
+
+
+console.log(store.getState());
 
 // Every time the state changes, log it
 // Note that subscribe() returns a function for unregistering the listener
@@ -23,16 +26,8 @@ let unsubscribe = store.subscribe(() =>
   console.log(store.getState())
 )
 
-// Dispatch some actions
-store.dispatch(addTodo('Learn about actions'))
-store.dispatch(addTodo('Learn about reducers'))
-store.dispatch(addTodo('Learn about store'))
-store.dispatch(completeTodo(0))
-store.dispatch(completeTodo(1))
-store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED))
-
 // Stop listening to state updates
-unsubscribe()
+//unsubscribe()
 
 console.log('Loaded environment variables:', env);
 
@@ -46,6 +41,11 @@ console.log('The author of this app is:', appDir.read('package.json', 'json').au
 
 
 render (
-  <HelloWorld />,
+  <div>
+    <HelloWorld />
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </div>,
   document.getElementById("root")
 )

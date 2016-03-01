@@ -2,12 +2,12 @@ const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return {
-        id: action.id,
-        text: action.text,
+        id: action.payload.id,
+        text: action.payload.text,
         completed: false
       }
     case 'TOGGLE_TODO':
-      if (state.id !== action.id) {
+      if (state.id !== action.payload) {
         return state
       }
 

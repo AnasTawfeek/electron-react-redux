@@ -7,6 +7,7 @@ const Todo = ({ onClick, completed, text }) => (
       textDecoration: completed ? 'line-through' : 'none'
     }}
   >
+    <input type="checkbox" checked={completed} value="0" />
     {text}
   </li>
 )

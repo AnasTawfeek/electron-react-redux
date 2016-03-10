@@ -1,23 +1,22 @@
 {
-  "name": "typetray",
-  "productName": "TypeTray",
-  "identifier": "com.impulsiveapps.typetray",
-  "description": "Manage your typeface library",
+  "name": "electron-react-redux",
+  "productName": "Electron React Redux",
+  "identifier": "com.company.package",
+  "description": "Electron boilerplate with react, redux and persistence wtih PouchDB / Immutable",
   "version": "0.1.0",
   "author": {
-    "name": "ImpulsiveApps",
-    "email": "impulsiveapps@gmail.com"
+    "name": "Vlad Fratila",
+    "email": "vlad.fratila@gmail.com"
   },
   "license": "MIT",
   "keywords": [
-    "font",
-    "font management",
-    "type",
-    "typography",
-    "design"
+    "react",
+    "reactjs",
+    "redux",
+    "electron",
+    "pouchdb"
   ],
-  "homepage": "https://impulsiveapps.com/typetray",
-  "copyright": "© 2016 impulsiveapps.com",
+  "homepage": "https://github.com/vladfr/electron-react-redux",
   "main": "background.js",
   "dependencies": {
     "fs-jetpack": "^0.7.0",

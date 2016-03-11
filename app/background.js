@@ -10,14 +10,36 @@ import windowStateKeeper from './vendor/electron_boilerplate/window_state';
 // in config/env_xxx.json file.
 import env from './env';
 
+// our redux store
+import store from './stores/index'
+
+app.reduxStore = store;
+
 let menu;
 let mainWindow = null;
+let debugWindow = null;
 
 // Preserver of the window size and position between app launches.
 let mainWindowState = windowStateKeeper('main', {
     width: 1000,
     height: 600
 });
+
+let startDebugWindow = () => {
+  if (debugWindow !== null) return;
+  debugWindow = new BrowserWindow({
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height
+  });
+
+  debugWindow.loadURL('file://' + __dirname + '/devtools.html');
+
+  debugWindow.on('close', () => {
+    debugWindow = null;
+  })
+}
 
 let buildMenu = function() {
   var template = [
@@ -201,6 +223,10 @@ let buildMenu = function() {
           click: function () {
               BrowserWindow.getFocusedWindow().toggleDevTools();
           }
+      }, {
+        label: 'Redux DevTools',
+        accelerator: 'Alt+CmdOrCtrl+O',
+        click: startDebugWindow
       }
     ]};
 
@@ -242,7 +268,12 @@ let startMainWindow = function() {
   });
 }
 
-app.on('ready', startMainWindow);
+app.on('ready', () => {
+  startMainWindow();
+  if (env.name === 'development') {
+    startDebugWindow();
+  }
+});
 app.on('activate', (event, hasVisibleWindows) => {
   if (!hasVisibleWindows) startMainWindow();
 });

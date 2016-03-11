@@ -27,7 +27,16 @@
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
     "redux-actions": "^0.9.1",
+    "redux-devtools-filterable-log-monitor": "^0.6.1",
     "redux-pouchdb-plus": "^0.8.1",
     "redux-thunk": "^2.0.1"
+  },
+  "devDependencies": {
+    "redux-devtools": "^3.1.1",
+    "redux-devtools-dispatch": "^2.0.1",
+    "redux-devtools-dock-monitor": "^1.1.0",
+    "redux-devtools-filterable-log-monitor": "^0.6.1",
+    "redux-devtools-log-monitor": "^1.0.5",
+    "redux-devtools-multiple-monitors": "^1.0.0"
   }
 }

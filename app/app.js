@@ -11,13 +11,10 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 
+// our main App component
 import App from './components/App'
-import HelloWorld from './hello_world/hello_world'; // code authored by you in this project
 
-// our main redux store
-import store from './stores/index'
-
-
+const store = remote.app.reduxStore;
 console.log(store.getState());
 
 // Every time the state changes, log it
@@ -38,14 +35,9 @@ var appDir = jetpack.cwd(app.getAppPath());
 // here files like it is node.js! Welcome to Electron world :)
 console.log('The author of this app is:', appDir.read('package.json', 'json').author);
 
-
-
 render (
-  <div>
-    <HelloWorld />
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </div>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 )

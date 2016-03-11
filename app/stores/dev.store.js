@@ -1,4 +1,3 @@
-import env from '../env'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { persistentStore } from 'redux-pouchdb-plus';
 import thunkMiddleware from 'redux-thunk';
@@ -15,20 +14,12 @@ const applyMiddlewares = applyMiddleware(
   thunkMiddleware
 );
 
-const dev_enhancer = compose(
-  applyMiddleware(thunkMiddleware),
+const createStoreWithMiddleware = compose(
+  applyMiddlewares,
   persistentStore({db}),
   DevTools.instrument()
-);
+)(createStore);
 
-const prod_enhancer = compose(
-  applyMiddleware(thunkMiddleware),
-  persistentStore({db})
-);
+const store = createStoreWithMiddleware(reducer);
 
-let enhancer;
-(env.name === "development") ? enhancer = dev_enhancer : enhancer = prod_enhancer;
-
-const store = createStore(reducer, enhancer);
-
-export default store;
+export store;

@@ -20,7 +20,7 @@ const DevTools = createDevTools(
                changePositionKey='ctrl-q'
                changeMonitorKey='ctrl-m'
                defaultIsVisible={true}
-               defaultSize='1'
+               defaultSize={1}
                fluid={true}
                >
     <MultipleMonitors>
